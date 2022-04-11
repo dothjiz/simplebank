@@ -12,7 +12,7 @@ dropdb:
 	docker exec -it postgres14 dropdb simple_bank
 
 migrateup:
-	docker run -v "$(FILE_PATH2)" --network host migrate/migrate -path=/database/ -database "$(DB_URL)" up
+	docker run -v "$(FILE_PATH)" --network host migrate/migrate -path=/database/ -database "$(DB_URL)" up
 
 migratedown:
 	docker run -v "$(FILE_PATH)" --network host migrate/migrate -path=/database/ -database "$(DB_URL)" down -all
