@@ -1,0 +1,30 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:14-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=simple_bank
+  
+    # healthcheck:
+      # test: pg_isready -U root -d simple_bank
+      # interval: 10s
+      # timeout: 3s
+      # retries: 5
+
+  sqlc:
+    image: kjconroy/sqlc
+  # migrate:
+    # image: migrate/migrate
+    # links: 
+      # - db
+    # depends_on:
+      # - postgres
+    # volumes:
+      # - I:\code\go\simplebank\migrations:/database
+    # # here instead of localhost as the host we use databaseservicename as that is the name we gave to the postgres service
+    # command:
+      # [ "-path", "/database", "-database",  "postgresql://root:secret@postgres:5432/simple_bank?sslmode=disable", "up" ]
